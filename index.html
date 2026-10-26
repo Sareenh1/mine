@@ -1,1 +1,393 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday ❤️</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: linear-gradient(160deg, #1a0a12 0%, #2d1320 40%, #1f0f1a 100%);
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      position: relative;
+      color: #f5e6d3;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb1 {
+      width: 380px; height: 380px;
+      background: #9f1239;
+      top: -120px; left: -100px;
+      animation: drift 14s ease-in-out infinite alternate;
+    }
+    .orb2 {
+      width: 300px; height: 300px;
+      background: #c9a227;
+      bottom: -80px; right: -80px;
+      animation: drift 18s ease-in-out infinite alternate-reverse;
+    }
+    .orb3 {
+      width: 220px; height: 220px;
+      background: #be123c;
+      top: 45%; left: 65%;
+      animation: drift 11s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to   { transform: translate(50px, 35px); }
+    }
+
+    .content {
+      position: relative;
+      z-index: 10;
+      padding: 24px;
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 6vw, 3.5rem);
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #f5d0a9, #e8b86d, #f5d0a9);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 5s linear infinite;
+      filter: drop-shadow(0 4px 24px rgba(232, 184, 109, 0.35));
+      letter-spacing: 1px;
+    }
+
+    @keyframes shine {
+      to { background-position: 200% center; }
+    }
+
+    #message {
+      font-size: 1.3rem;
+      margin-bottom: 36px;
+      min-height: 52px;
+      font-weight: 500;
+      color: #f0d5c0;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      transition: all 0.3s ease;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 16px 42px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    #yesBtn {
+      background: linear-gradient(135deg, #9f1239, #be123c);
+      color: #fff8f0;
+      box-shadow: 0 12px 32px rgba(159, 18, 57, 0.5),
+                  0 0 0 1px rgba(232, 184, 109, 0.25);
+      animation: pulse 2.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 12px 32px rgba(159, 18, 57, 0.5), 0 0 0 0 rgba(201, 162, 39, 0.3); }
+      50%      { box-shadow: 0 12px 32px rgba(159, 18, 57, 0.6), 0 0 0 14px rgba(201, 162, 39, 0); }
+    }
+
+    #yesBtn:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 18px 40px rgba(159, 18, 57, 0.65);
+    }
+
+    #noBtn {
+      background: rgba(255, 248, 240, 0.08);
+      color: #e8c9a8;
+      border: 1px solid rgba(232, 184, 109, 0.35);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    }
+
+    #noBtn:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 248, 240, 0.14);
+      border-color: rgba(232, 184, 109, 0.55);
+    }
+
+    #musicBtn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 1px solid rgba(232, 184, 109, 0.4);
+      background: linear-gradient(135deg, #9f1239, #be123c);
+      color: #fff8f0;
+      font-size: 1.4rem;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(159, 18, 57, 0.45);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      padding: 0;
+    }
+
+    #musicBtn:hover { transform: scale(1.12); }
+    #musicBtn.muted {
+      background: linear-gradient(135deg, #4a3f3a, #5c524c);
+      opacity: 0.85;
+    }
+
+    .heart {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: linear-gradient(135deg, #e8b86d, #c9a227);
+      transform: rotate(45deg);
+      animation: floatUp linear forwards;
+      opacity: 0.7;
+      filter: drop-shadow(0 3px 8px rgba(201, 162, 39, 0.4));
+      pointer-events: none;
+      z-index: 5;
+    }
+    .heart::before, .heart::after {
+      content: '';
+      width: 14px;
+      height: 14px;
+      background: inherit;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .heart::before { top: -7px; left: 0; }
+    .heart::after  { left: -7px; top: 0; }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(0) rotate(45deg) scale(0.5); opacity: 0; }
+      15%  { opacity: 0.8; }
+      100% { transform: translateY(-110vh) rotate(45deg) scale(1.1); opacity: 0; }
+    }
+
+    .final {
+      max-width: 560px;
+      padding: 24px;
+      animation: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.65); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .final h1 {
+      font-size: clamp(2.6rem, 7vw, 3.6rem);
+      margin-bottom: 28px;
+    }
+
+    .final p {
+      font-size: 1.25rem;
+      color: #f0d5c0;
+      line-height: 1.9;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .final strong { color: #e8b86d; }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -20px;
+      z-index: 100;
+      animation: confettiFall linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes confettiFall {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <div class="content" id="mainContent">
+    <h1>Happy Birthday My Love ❤️</h1>
+    <div id="message">Do you want your birthday wish?</div>
+    <div class="buttons">
+      <button id="yesBtn">Yes 🎁</button>
+      <button id="noBtn">No</button>
+    </div>
+  </div>
+
+  <button id="musicBtn" title="Music On/Off">🔊</button>
+
+  <audio id="bgMusic" loop preload="auto">
+    <source src="audio.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const message = document.getElementById('message');
+    const mainContent = document.getElementById('mainContent');
+    const musicBtn = document.getElementById('musicBtn');
+    const bgMusic = document.getElementById('bgMusic');
+
+    let scale = 1;
+    let messageIndex = 0;
+    let musicStarted = false;
+    let isMuted = false;
+
+    const messages = [
+      "Are you sure? Something special is waiting... 🎁",
+      "Come on, just one little click ❤️",
+      "I made this only for you...",
+      "Pretty please? 🥺",
+      "The gift is getting impatient 😂",
+      "You know you want to open it...",
+      "Last chance... or is it? 👀",
+      "My heart is waiting for your Yes 💖",
+      "Just click Yes already 😭❤️"
+    ];
+
+    const colors = ["#e8b86d", "#f0d5c0", "#e8c9a8", "#f5d0a9", "#c9a227", "#f0d5c0"];
+
+    function startMusic() {
+      if (musicStarted || isMuted) return;
+      bgMusic.volume = 0.5;
+      const playPromise = bgMusic.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          musicStarted = true;
+          musicBtn.textContent = '🔊';
+          musicBtn.classList.remove('muted');
+        }).catch(() => {
+          musicBtn.textContent = '🔇';
+          musicBtn.classList.add('muted');
+        });
+      }
+    }
+
+    musicBtn.addEventListener('click', () => {
+      if (!musicStarted) {
+        isMuted = false;
+        startMusic();
+        return;
+      }
+      if (bgMusic.paused || isMuted) {
+        isMuted = false;
+        bgMusic.play();
+        musicBtn.textContent = '🔊';
+        musicBtn.classList.remove('muted');
+      } else {
+        isMuted = true;
+        bgMusic.pause();
+        musicBtn.textContent = '🔇';
+        musicBtn.classList.add('muted');
+      }
+    });
+
+    noBtn.addEventListener('click', () => {
+      startMusic();
+      scale = Math.min(scale * 1.22, 2.8);
+      yesBtn.style.transform = `scale(${scale})`;
+      message.textContent = messages[messageIndex % messages.length];
+      message.style.color = colors[messageIndex % colors.length];
+      message.style.transform = "scale(1.06)";
+      setTimeout(() => message.style.transform = "scale(1)", 180);
+      messageIndex++;
+      const x = (Math.random() - 0.5) * 60;
+      const y = (Math.random() - 0.5) * 40;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    noBtn.addEventListener('mouseenter', () => {
+      if (messageIndex > 2) {
+        const x = (Math.random() - 0.5) * 120;
+        const y = (Math.random() - 0.5) * 80;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+      }
+    });
+
+    yesBtn.addEventListener('click', () => {
+      startMusic();
+      launchConfetti();
+      mainContent.innerHTML = `
+        <div class="final">
+          <h1>YAYYY!! 🎉❤️</h1>
+          <p>
+            Happy Birthday my dearest wife!<br><br>
+            You make every day brighter just by being in my life.<br>
+            Thank you for your love, your smile, and for being my best friend.<br><br>
+            I love you more than words can say.<br><br>
+            <strong>Forever yours ❤️</strong>
+          </p>
+        </div>
+      `;
+    });
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.bottom = '-20px';
+      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+      const size = 11 + Math.random() * 9;
+      heart.style.width = heart.style.height = size + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
+    }
+    setInterval(createHeart, 400);
+
+    function launchConfetti() {
+      const colors = ['#9f1239', '#be123c', '#e8b86d', '#c9a227', '#f5d0a9', '#f0d5c0', '#e11d48'];
+      for (let i = 0; i < 90; i++) {
+        setTimeout(() => {
+          const conf = document.createElement('div');
+          conf.classList.add('confetti');
+          conf.style.left = Math.random() * 100 + 'vw';
+          conf.style.background = colors[Math.floor(Math.random() * colors.length)];
+          conf.style.width = (6 + Math.random() * 8) + 'px';
+          conf.style.height = (6 + Math.random() * 8) + 'px';
+          conf.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+          conf.style.animationDuration = (2.5 + Math.random() * 2.5) + 's';
+          document.body.appendChild(conf);
+          setTimeout(() => conf.remove(), 5500);
+        }, i * 16);
+      }
+    }
+  </script>
+</body>
+</html>
